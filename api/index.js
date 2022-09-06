@@ -3,7 +3,9 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
-const usersRouter = require("./routes/users");
+const usersRoute = require("./routes/users");
+const postsRoute = require("./routes/posts");
+const categoriesRoute = require("./routes/categories");
 
 dotenv.config();
 app.use(express.json());
@@ -16,14 +18,12 @@ mongoose
     });
 
 app.use("/api/auth", authRoute);
-app.use("/api/users", usersRouter);
+app.use("/api/users", usersRoute);
+app.use("/api/posts", postsRoute);
+app.use("/api/categories", categoriesRoute);
 
 const PORT = 3000;
 
-app.use("/", (req, res) => {
-    console.log("You joined the main page.");
-});
-
 app.listen(PORT, () => {
-    console.log("Running.");
+    console.log(`Server running on PORT ${PORT}.`);
 });
